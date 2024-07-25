@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded",()=>{
     const quoteDisplay = document.getElementById('quoteDisplay');
     const showButtonQuote = document.getElementById('newQuote');
+    const newQuoteText = document.getElementById('newQuoteText');
+    const newQuoteCategory = document.getElementById('newQuoteCategory');
+    const quoteAuthor=document.getElementById('author');
+
 
     const quotes = [
         {
@@ -38,9 +42,29 @@ document.addEventListener("DOMContentLoaded",()=>{
     //Function to display quotes
     function displayQuote (){
         const quote =showRandomQuote();
-        quoteDisplay.innerHTML = `<p> ${quote.text}</p><br><p>${quote.author}</p><br><p>${quote.category}</p>`;
+        quoteDisplay.innerHTML = `<p> ${quote.text}</p><br><p> - ${quote.author}</p><br><p>Category: ${quote.category}</p>`;
     };
+
+    //Function to add Quote
+    function addQuote (){
+        const text =newQuoteText.value.trim();
+        const author = quoteAuthor.value.trim();
+        const quoteCategory = newQuoteCategory.value.trim();
+
+        if(text && quoteAuthor && quoteCategory){
+            quotes.push({text:text,author:author,category:quoteCategory});
+            newQuoteText.value ="";
+            quoteAuthor.value ="";
+            newQuoteCategory.value ="";
+            alert("Quote added successfully");
+        }
+        else{
+            alert("Please add a Quote,author and a Category");
+        }
+    }
+    
     
     displayQuote();
     showButtonQuote.addEventListener('click',displayQuote);
+    document.getElementById('addQuote').addEventListener('click',addQuote);
 });
