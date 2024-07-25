@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     };
 
     //Function to add Quote
-    function addQuote (){
+    function createAddQuoteForm (){
         const text =newQuoteText.value.trim();
         const author = quoteAuthor.value.trim();
         const quoteCategory = newQuoteCategory.value.trim();
@@ -66,5 +66,5 @@ document.addEventListener("DOMContentLoaded",()=>{
     
     displayQuote();
     showButtonQuote.addEventListener('click',displayQuote);
-    document.getElementById('addQuote').addEventListener('click',addQuote);
+    document.getElementById('addQuote').addEventListener('click',createAddQuoteForm);
 });
