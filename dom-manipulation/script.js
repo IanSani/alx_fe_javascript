@@ -43,14 +43,31 @@ document.addEventListener("DOMContentLoaded",()=>{
     //Function to add Quote
     function createAddQuoteForm (){
         const text =newQuoteText.value.trim();
-        const author = quoteAuthor.value.trim();
         const quoteCategory = newQuoteCategory.value.trim();
 
         if(text && quoteAuthor && quoteCategory){
-            quotes.push({text:text,author:author,category:quoteCategory});
-            newQuoteText.value ="";
-            quoteAuthor.value ="";
-            newQuoteCategory.value ="";
+            quotes.push({text:text,category:quoteCategory});
+
+            //Clear previous Text
+            while(quoteDisplay.firstChild){
+                quoteDisplay.removeChild(quoteDisplay.firstChild);
+            }
+
+            //Create Elements
+            const newQuoteDisplay = document.createElement('div');
+            const newTextElement = document.createElement('p');
+            const newCategoryElement = document.createElement('p');
+            
+            //Give them input values
+            newTextElement= quote.text;
+            newCategoryElement =`Category: ${quote.category}`;
+
+            //Append the elements
+            newQuoteDisplay.appendChild(newTextElement);
+            newQuoteDisplay.appendChild(newCategoryElement);
+
+            newTextElement.value ="";
+            newCategoryElement.value ="";
             alert("Quote added successfully");
         }
         else{
