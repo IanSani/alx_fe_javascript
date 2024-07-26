@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     const newQuoteCategory = document.getElementById('newQuoteCategory');
     const quoteAuthor=document.getElementById('author');
 
-
-    const quotes = [
+    //We load the tasks 
+    const quotes =JSON.parse(localStorage.getItem('quotes')) || [
         {
             text: "The only limit to our realization of tomorrow is our doubts of today.",
             category: "Inspirational"
@@ -45,8 +45,9 @@ document.addEventListener("DOMContentLoaded",()=>{
         const text =newQuoteText.value.trim();
         const quoteCategory = newQuoteCategory.value.trim();
 
-        if(text && quoteAuthor && quoteCategory){
+        if(text && quoteCategory){
             quotes.push({text:text,category:quoteCategory});
+
 
             //Clear previous Text
             while(quoteDisplay.firstChild){
@@ -59,8 +60,8 @@ document.addEventListener("DOMContentLoaded",()=>{
             const newCategoryElement = document.createElement('p');
             
             //Give them input values
-            newTextElement= quote.text;
-            newCategoryElement =`Category: ${quote.category}`;
+            newTextElement.textContent= text;
+            newCategoryElement.textContent =`Category: ${quoteCategory}`;
 
             //Append the elements
             newQuoteDisplay.appendChild(newTextElement);
@@ -69,11 +70,15 @@ document.addEventListener("DOMContentLoaded",()=>{
             newTextElement.value ="";
             newCategoryElement.value ="";
             alert("Quote added successfully");
+
+             //After Quote is Added we save it to LocalStorage
+             localStorage.setItem('quotes',JSON.stringify(quotes));
         }
         else{
             alert("Please add a Quote,author and a Category");
         }
     }
+
     
     
     displayQuote();
