@@ -3,8 +3,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     const showButtonQuote = document.getElementById('newQuote');
     const newQuoteText = document.getElementById('newQuoteText');
     const newQuoteCategory = document.getElementById('newQuoteCategory');
-    
-    let quotes = [
+    const quoteAuthor=document.getElementById('author');
+
+
+    const quotes = [
         {
             text: "The only limit to our realization of tomorrow is our doubts of today.",
             category: "Inspirational"
@@ -24,26 +26,8 @@ document.addEventListener("DOMContentLoaded",()=>{
         {
             text: "Believe you can and you're halfway there.",
             category: "Belief"
-        },
-        {
-            text: "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful.",
-            category: "Success"
-        },
-        {
-            text: "In the end, it's not the years in your life that count. It's the life in your years.",
-            category: "Life"
-        },
-        {
-            text: "The best way to predict your future is to create it.",
-            category: "Motivational"
-        },
-        {
-            text: "You miss 100% of the shots you don't take.",
-            category: "Opportunity"
         }
     ];
-    
-
     
     function showRandomQuote (){
             const randomIndex = Math.floor(Math.random () *quotes.length);
@@ -52,22 +36,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     };
     //Function to display quotes
     function displayQuote (){
-       while(quoteDisplay.firstChild){
-        quoteDisplay.removeChild(quoteDisplay.firstChild);
-       }
-       const quote = showRandomQuote();
-
-       //Create Elements
-       const textElement = document.createElement('p');
-       const quoteCategory = document.createElement('p');
-
-       //Set Text Context
-        textElement.textContent = quote.text;
-        quoteCategory.textContent = `Category : ${quote.category}`;
-        
-        //Append Elements
-        quoteDisplay.appendChild(textElement);
-        quoteDisplay.appendChild(quoteCategory);
+        const quote =showRandomQuote();
+        quoteDisplay.innerHTML = `<p> ${quote.text}</p><br><p> - ${quote.category}</p>`;
     };
 
     //Function to add Quote
