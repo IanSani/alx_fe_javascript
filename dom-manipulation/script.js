@@ -3,36 +3,47 @@ document.addEventListener("DOMContentLoaded",()=>{
     const showButtonQuote = document.getElementById('newQuote');
     const newQuoteText = document.getElementById('newQuoteText');
     const newQuoteCategory = document.getElementById('newQuoteCategory');
-    const quoteAuthor=document.getElementById('author');
-
-
-    const quotes = [
+    
+    let quotes = [
         {
             text: "The only limit to our realization of tomorrow is our doubts of today.",
-            author: "Franklin D. Roosevelt",
             category: "Inspirational"
         },
         {
             text: "Life is what happens when you're busy making other plans.",
-            author: "John Lennon",
             category: "Life"
         },
         {
             text: "Get busy living or get busy dying.",
-            author: "Stephen King",
             category: "Motivational"
         },
         {
             text: "You have within you right now, everything you need to deal with whatever the world can throw at you.",
-            author: "Brian Tracy",
             category: "Encouragement"
         },
         {
             text: "Believe you can and you're halfway there.",
-            author: "Theodore Roosevelt",
             category: "Belief"
+        },
+        {
+            text: "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful.",
+            category: "Success"
+        },
+        {
+            text: "In the end, it's not the years in your life that count. It's the life in your years.",
+            category: "Life"
+        },
+        {
+            text: "The best way to predict your future is to create it.",
+            category: "Motivational"
+        },
+        {
+            text: "You miss 100% of the shots you don't take.",
+            category: "Opportunity"
         }
     ];
+    
+
     
     function showRandomQuote (){
             const randomIndex = Math.floor(Math.random () *quotes.length);
@@ -41,8 +52,22 @@ document.addEventListener("DOMContentLoaded",()=>{
     };
     //Function to display quotes
     function displayQuote (){
-        const quote =showRandomQuote();
-        quoteDisplay.innerHTML = `<p> ${quote.text}</p><br><p> - ${quote.author}</p><br><p>Category: ${quote.category}</p>`;
+       while(quoteDisplay.firstChild){
+        quoteDisplay.removeChild(quoteDisplay.firstChild);
+       }
+       const quote = showRandomQuote();
+
+       //Create Elements
+       const textElement = document.createElement('p');
+       const quoteCategory = document.createElement('p');
+
+       //Set Text Context
+        textElement.textContent = quote.text;
+        quoteCategory.textContent = `Category : ${quote.category}`;
+        
+        //Append Elements
+        quoteDisplay.appendChild(textElement);
+        quoteDisplay.appendChild(quoteCategory);
     };
 
     //Function to add Quote
