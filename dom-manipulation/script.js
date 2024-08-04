@@ -193,7 +193,6 @@ async function syncQuotesWithConflictResolution() {
     const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
     let conflictsResolved = false;
 
-    // Merge server quotes with local quotes (server quotes take precedence)
     const mergedQuotes = [...serverQuotes, ...localQuotes.filter(localQuote => {
         const conflict = serverQuotes.some(serverQuote => serverQuote.text === localQuote.text);
         if (conflict) conflictsResolved = true;
@@ -203,6 +202,8 @@ async function syncQuotesWithConflictResolution() {
     localStorage.setItem('quotes', JSON.stringify(mergedQuotes));
     if (conflictsResolved) {
         displayNotification('Conflicts resolved, server data takes precedence.');
+    } else {
+        displayNotification('Quotes synced with server!');
     }
 }
 
