@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     const quoteAuthor=document.getElementById('author');
     const exportQuotesButton = document.getElementById('exportQuotes');
     const importFileInput = document.getElementById('importFile');
-    const exportQuotesButton = document.getElementById('exportQuotes');
-    const importFileInput = document.getElementById('importFile');
     
 
     //We load the tasks 
