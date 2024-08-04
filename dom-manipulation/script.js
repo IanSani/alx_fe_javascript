@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const quoteAuthor=document.getElementById('author');
     const exportQuotesButton = document.getElementById('exportQuotes');
     const importFileInput = document.getElementById('importFile');
-    
+    const categoryFilter = document.getElementById('categoryFilter');
 
     //We load the tasks 
     const quotes =JSON.parse(localStorage.getItem('quotes')) || [
@@ -81,6 +81,22 @@ document.addEventListener("DOMContentLoaded",()=>{
             alert("Please add a Quote,author and a Category");
         }
     }
+    // Populate categories in the dropdown
+    function populateCategories() {
+        const categories = [...new Set(quotes.map(quote => quote.category))];
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categoryFilter.appendChild(option);
+        });
+
+        // Set the last selected category from local storage
+        const lastSelectedCategory = localStorage.getItem('selectedCategory') || 'all';
+        categoryFilter.value = lastSelectedCategory;
+        filterQuotes();
+    }
+    
     function exportQuotes() {
         const dataStr = JSON.stringify(quotes, null, 2);
         const blob = new Blob([dataStr], { type: "application/json" });
@@ -104,6 +120,20 @@ document.addEventListener("DOMContentLoaded",()=>{
         };
         fileReader.readAsText(event.target.files[0]);
       }
+
+       // Function to filter quotes based on selected category
+    function filterQuotes() {
+        const selectedCategory = categoryFilter.value;
+        localStorage.setItem('selectedCategory', selectedCategory);
+        const filteredQuotes = selectedCategory === 'all' ? quotes : quotes.filter(quote => quote.category === selectedCategory);
+
+        // Display the first quote from the filtered list
+        if (filteredQuotes.length > 0) {
+            displayQuote(filteredQuotes[0]);
+        } else {
+            quoteDisplay.innerHTML = "<p>No quotes available in this category.</p>";
+        }
+    }
     
     
 
